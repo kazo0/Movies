@@ -8,5 +8,7 @@ namespace Movies.Presentation.ViewModels
 	public class ViewModelBase : INotifyPropertyChanged
 	{
 		public event PropertyChangedEventHandler PropertyChanged;
+
+		public bool IsBusy { get; set; }
 	}
 }

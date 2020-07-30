@@ -35,8 +35,7 @@ namespace Movies.Clients
 			var response = await _httpClient.GetAsync(
 				requestUri
 					.SetQueryParam("api_key", "key")
-					.SetQueryParam("language", CultureInfo.CurrentCulture.TwoLetterISOLanguageName)
-					.ToString());
+					.SetQueryParam("language", CultureInfo.CurrentCulture.TwoLetterISOLanguageName));
 
 			if (response.IsSuccessStatusCode)
 			{

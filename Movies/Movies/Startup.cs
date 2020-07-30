@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Movies.Clients;
 using Movies.Presentation.ViewModels;
+using Xamarin.Essentials;
 
 namespace Movies
 {
@@ -16,7 +19,16 @@ namespace Movies
 
 		public static void Init()
 		{
+
+			using var stream = Assembly.GetExecutingAssembly()
+				.GetManifestResourceStream("Movies.appsettings.json");
 			var host = new HostBuilder()
+				.ConfigureHostConfiguration(c =>
+				{
+					c.AddCommandLine(new string[] { $"ContentRoot={FileSystem.AppDataDirectory}" });
+					
+					c.AddJsonStream(stream);
+				})
 				.ConfigureServices(ConfigureServices)
 				.ConfigureLogging(l => l.AddConsole())
 				.Build();

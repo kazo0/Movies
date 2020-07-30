@@ -9,8 +9,8 @@ namespace Movies
 		public App()
 		{
 			InitializeComponent();
-
-			MainPage = new MainPage();
+			Startup.Init();
+			MainPage = Startup.ServiceProvider.GetService<Movies.MainPage>();
 		}
 
 		protected override void OnStart()

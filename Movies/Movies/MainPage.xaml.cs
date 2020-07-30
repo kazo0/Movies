@@ -4,6 +4,8 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Movies.Presentation.ViewModels;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace Movies
@@ -13,9 +15,17 @@ namespace Movies
 	[DesignTimeVisible(false)]
 	public partial class MainPage : ContentPage
 	{
-		public MainPage()
+		public MainPage(TopMoviesViewModel viewModel)
 		{
 			InitializeComponent();
+			BindingContext = viewModel;
+		}
+
+		protected override void OnAppearing()
+		{
+			base.OnAppearing();
+
+			MainThread.BeginInvokeOnMainThread(async () => await ((TopMoviesViewModel)BindingContext).Init());
 		}
 	}
 }
