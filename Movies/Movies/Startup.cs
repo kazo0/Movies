@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Movies.Clients;
 using Movies.Presentation.ViewModels;
 
 namespace Movies
@@ -25,7 +26,11 @@ namespace Movies
 
 		private static void ConfigureServices(HostBuilderContext ctx, IServiceCollection services)
 		{
-			services.AddHttpClient();
+			services.AddHttpClient<ITmdbClient, TmdbClient>(config =>
+			{
+				config.BaseAddress = new Uri(Constants.Tmdb.BASE_URL);
+			});
+
 			services.RegisterViewModels();
 			services.RegisterPages();
 		}

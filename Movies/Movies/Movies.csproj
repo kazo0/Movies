@@ -18,6 +18,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Movies.Clients\Movies.Clients.csproj" />
     <ProjectReference Include="..\..\Movies.Presentation\Movies.Presentation.csproj" />
+    <ProjectReference Include="..\..\Movies.Services\Movies.Services.csproj" />
   </ItemGroup>
 </Project>
