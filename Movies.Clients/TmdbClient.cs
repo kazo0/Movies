@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Flurl;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Http;
 using Microsoft.Extensions.Logging;
 using Movies.Clients.Models;
@@ -16,10 +17,12 @@ namespace Movies.Clients
 	{
 		private readonly HttpClient _httpClient;
 		private readonly ILogger<TmdbClient> _logger;
+		private readonly IConfiguration _configuration;
 
-		public TmdbClient(HttpClient httpClient, ILogger<TmdbClient> logger)
+		public TmdbClient(HttpClient httpClient, ILogger<TmdbClient> logger, IConfiguration configuration)
 		{
 			_logger = logger;
+			_configuration = configuration;
 			_httpClient = httpClient;
 		}
 
@@ -32,10 +35,10 @@ namespace Movies.Clients
 
 		private async Task<T> GetResponse<T>(string requestUri)
 		{
-			var response = await _httpClient.GetAsync(
-				requestUri
-					.SetQueryParam("api_key", "key")
-					.SetQueryParam("language", CultureInfo.CurrentCulture.TwoLetterISOLanguageName));
+			var response = await _httpClient.GetAsync(requestUri
+				.SetQueryParam("api_key", _configuration["TmdbApiKey"])
+				.SetQueryParam("language", CultureInfo.CurrentCulture.TwoLetterISOLanguageName));
+
 
 			if (response.IsSuccessStatusCode)
 			{

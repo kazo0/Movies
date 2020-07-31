@@ -10,7 +10,7 @@ namespace Movies
 		{
 			InitializeComponent();
 			Startup.Init();
-			MainPage = Startup.ServiceProvider.GetService<Movies.MainPage>();
+			MainPage = Startup.ServiceProvider.GetService<MainPage>();
 		}
 
 		protected override void OnStart()

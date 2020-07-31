@@ -5,10 +5,12 @@ using System.Reflection;
 using System.Text;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Movies.Clients;
 using Movies.Presentation.ViewModels;
+using Movies.Services;
 using Xamarin.Essentials;
 
 namespace Movies
@@ -19,15 +21,16 @@ namespace Movies
 
 		public static void Init()
 		{
-
-			using var stream = Assembly.GetExecutingAssembly()
-				.GetManifestResourceStream("Movies.appsettings.json");
-			var host = new HostBuilder()
-				.ConfigureHostConfiguration(c =>
+			
+			var host = Host.CreateDefaultBuilder()
+				.ConfigureAppConfiguration(config =>
 				{
-					c.AddCommandLine(new string[] { $"ContentRoot={FileSystem.AppDataDirectory}" });
-					
-					c.AddJsonStream(stream);
+					////config.AddCommandLine(new string[] { $"ContentRoot={FileSystem.AppDataDirectory}" });
+					//using var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("Movies.secrets.json");
+					////read in the configuration file!
+					//config.AddJsonStream(stream);
+					config.SetFileProvider(new EmbeddedFileProvider(typeof(App).Assembly));
+					config.AddJsonFile("secrets.json", optional: true);
 				})
 				.ConfigureServices(ConfigureServices)
 				.ConfigureLogging(l => l.AddConsole())
@@ -40,9 +43,9 @@ namespace Movies
 		{
 			services.AddHttpClient<ITmdbClient, TmdbClient>(config =>
 			{
-				config.BaseAddress = new Uri(Constants.Tmdb.BASE_URL);
+				config.BaseAddress = new Uri(ctx.Configuration["Tmdb:BaseUrl"]);
 			});
-
+			services.AddTransient<IMoviesService, TmdbMoviesService>();
 			services.RegisterViewModels();
 			services.RegisterPages();
 		}

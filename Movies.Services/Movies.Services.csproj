@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Movies.Clients\Movies.Clients.csproj" />
+    <ProjectReference Include="..\Movies.Core\Movies.Core.csproj" />
   </ItemGroup>
 
 </Project>

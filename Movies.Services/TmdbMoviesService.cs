@@ -27,7 +27,11 @@ namespace Movies.Services
 				{
 					Total = response.TotalResults,
 					Page = response.Page,
-					Items = response.Results.Select(x => new Movie {Title = x.Title}).ToList()
+					Items = response.Results.Select(x => new Movie
+					{
+						Title = x.Title,
+						PosterUrl = $"https://image.tmdb.org/t/p/w185{x.PosterPath}"
+					}).ToList()
 				};
 		}
 	}
