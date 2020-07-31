@@ -26,6 +26,7 @@ namespace Movies.Services
 				: new PagedList<Movie>
 				{
 					Total = response.TotalResults,
+					TotalPages = response.TotalPages,
 					Page = response.Page,
 					Items = response.Results.Select(x => new Movie
 					{

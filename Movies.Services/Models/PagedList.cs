@@ -7,6 +7,7 @@ namespace Movies.Services.Models
 	public class PagedList<T>
 	{
 		public int Total { get; set; }
+		public int TotalPages { get; set; }
 		public int Page { get; set; }
 		public IReadOnlyList<T> Items { get; set; }
 	}

@@ -5,23 +5,24 @@ using System.Reflection;
 using System.Text;
 using Microsoft.Extensions.DependencyInjection;
 using Movies.Presentation.ViewModels;
+using Movies.Views;
 using Xamarin.Forms;
 
 namespace Movies
 {
 	public static class ServiceCollectionExtensions
 	{
-		public static void RegisterViewModels(this IServiceCollection services)
+		public static void AddViewModels(this IServiceCollection services)
 		{
-			services.RegisterAllSubclassesOf<ViewModelBase>(typeof(ViewModelBase).Assembly);
+			services.AddAllSubclassesOf<ViewModelBase>(typeof(ViewModelBase).Assembly);
 		}
 
-		public static void RegisterPages(this IServiceCollection services)
+		public static void AddPages(this IServiceCollection services)
 		{
-			services.RegisterAllSubclassesOf<Page>(typeof(MainPage).Assembly);
+			services.AddAllSubclassesOf<Page>(typeof(AppShell).Assembly);
 		}
 
-		public static void RegisterAllSubclassesOf<T>(
+		public static void AddAllSubclassesOf<T>(
 			this IServiceCollection services, 
 			Assembly assembly, 
 			ServiceLifetime lifetime = ServiceLifetime.Transient)

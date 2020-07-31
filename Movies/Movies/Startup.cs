@@ -25,15 +25,11 @@ namespace Movies
 			var host = Host.CreateDefaultBuilder()
 				.ConfigureAppConfiguration(config =>
 				{
-					////config.AddCommandLine(new string[] { $"ContentRoot={FileSystem.AppDataDirectory}" });
-					//using var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("Movies.secrets.json");
-					////read in the configuration file!
-					//config.AddJsonStream(stream);
 					config.SetFileProvider(new EmbeddedFileProvider(typeof(App).Assembly));
 					config.AddJsonFile("secrets.json", optional: true);
 				})
 				.ConfigureServices(ConfigureServices)
-				.ConfigureLogging(l => l.AddConsole())
+				.ConfigureLogging(builder => builder.AddConsole())
 				.Build();
 
 			ServiceProvider = host.Services;
@@ -45,9 +41,11 @@ namespace Movies
 			{
 				config.BaseAddress = new Uri(ctx.Configuration["Tmdb:BaseUrl"]);
 			});
+
 			services.AddTransient<IMoviesService, TmdbMoviesService>();
-			services.RegisterViewModels();
-			services.RegisterPages();
+
+			services.AddViewModels();
+			services.AddPages();
 		}
 	}
 }

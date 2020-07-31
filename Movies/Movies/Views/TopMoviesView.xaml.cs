@@ -1,24 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Movies.Presentation.ViewModels;
 using Xamarin.Essentials;
 using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
-namespace Movies
+namespace Movies.Views
 {
-	// Learn more about making custom code visible in the Xamarin.Forms previewer
-	// by visiting https://aka.ms/xamarinforms-previewer
-	[DesignTimeVisible(false)]
-	public partial class MainPage : ContentPage
+	[XamlCompilation(XamlCompilationOptions.Compile)]
+	public partial class TopMoviesView : ContentPage
 	{
-		public MainPage(TopMoviesViewModel viewModel)
+		public TopMoviesView()
 		{
 			InitializeComponent();
-			BindingContext = viewModel;
+			BindingContext = Startup.ServiceProvider.GetService<TopMoviesViewModel>();
 		}
 
 		protected override void OnAppearing()

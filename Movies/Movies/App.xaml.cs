@@ -1,4 +1,5 @@
 ﻿using System;
+using Movies.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -10,7 +11,7 @@ namespace Movies
 		{
 			InitializeComponent();
 			Startup.Init();
-			MainPage = Startup.ServiceProvider.GetService<MainPage>();
+			MainPage = Startup.ServiceProvider.GetService<AppShell>();
 		}
 
 		protected override void OnStart()

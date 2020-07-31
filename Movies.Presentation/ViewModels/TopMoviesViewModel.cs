@@ -8,8 +8,8 @@ using Movies.Core.Extensions;
 using Movies.Services;
 using Movies.Services.Models;
 using MvvmHelpers;
+using MvvmHelpers.Commands;
 using Xamarin.Essentials;
-using Xamarin.Forms;
 
 namespace Movies.Presentation.ViewModels
 {
@@ -17,10 +17,15 @@ namespace Movies.Presentation.ViewModels
 	{
 		private readonly IMoviesService _moviesService;
 		private int _currentPage = 1;
+		private int _maxPages = 0;
 
 		public ObservableRangeCollection<Movie> Movies { get; set; }
+		public int MoviesThreshold { get; set; } = 5;
 
-		public ICommand NextPageCommand => new Command(async () => await LoadNextPage());
+		public bool IsRefreshing { get; set; }
+
+		public ICommand NextPageCommand => new AsyncCommand(LoadNextPage);
+		public ICommand RefreshCommand => new AsyncCommand(Refresh);
 
 		public TopMoviesViewModel(IMoviesService moviesService)
 		{
@@ -29,20 +34,46 @@ namespace Movies.Presentation.ViewModels
 
 		public async Task Init()
 		{
+			IsBusy = true;
+
 			var results = await _moviesService.GetTopMovies(_currentPage);
-			MainThread.BeginInvokeOnMainThread(() =>
-			{
-				Movies = new ObservableRangeCollection<Movie>(results?.Items.Safe() ?? new List<Movie>());
-			});
+			_maxPages = results.TotalPages;
+
+			Movies = new ObservableRangeCollection<Movie>(results?.Items.Safe() ?? new List<Movie>());
+			IsBusy = false;
 		}
 
 		private async Task LoadNextPage()
 		{
-			var results = await _moviesService.GetTopMovies(++_currentPage);
+			if (IsBusy)
+			{
+				return;
+			}
+			IsBusy = true;
+
+			var results = await _moviesService.GetTopMovies(_currentPage + 1);
 			if (results?.Items.Any() ?? false)
 			{
-				MainThread.BeginInvokeOnMainThread(() => { Movies.AddRange(results.Items); });
+				_currentPage = results.Page;
+				Movies.AddRange(results.Items);
 			}
+			else
+			{
+				MoviesThreshold = -1;
+			}
+
+			IsBusy = false;
+		}
+
+		private async Task Refresh()
+		{
+			_currentPage = 1;
+			var results = await _moviesService.GetTopMovies(_currentPage);
+
+			Movies.Clear();
+			Movies = new ObservableRangeCollection<Movie>(results?.Items.Safe() ?? new List<Movie>());
+
+			IsRefreshing = false;
 		}
 	}
 }
