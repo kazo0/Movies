@@ -29,7 +29,8 @@ namespace Movies
 		{
 			var types = assembly
 				.DefinedTypes
-				.Where(t => t.IsSubclassOf(typeof(T)));
+				.Where(t => t.IsSubclassOf(typeof(T)) &&
+				            !t.IsAbstract);
 
 			foreach (var type in types)
 			{

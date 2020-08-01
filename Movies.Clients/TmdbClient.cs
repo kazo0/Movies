@@ -33,6 +33,13 @@ namespace Movies.Clients
 					.SetQueryParam("page", page));
 		}
 
+		public async Task<PagedResponse<Movie>> GetPopularMovies(int page)
+		{
+			return await GetResponse<PagedResponse<Movie>>(
+				Constants.Tmdb.POPULAR
+					.SetQueryParam("page", page));
+		}
+
 		private async Task<T> GetResponse<T>(string requestUri)
 		{
 			var response = await _httpClient.GetAsync(requestUri

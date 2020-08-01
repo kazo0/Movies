@@ -6,7 +6,15 @@
        xmlns:views="clr-namespace:Movies.Views;assembly=Movies"
        mc:Ignorable="d"
        x:Class="Movies.Views.AppShell">
-	<FlyoutItem>
-		<ShellContent Title="Top Movies" ContentTemplate="{DataTemplate views:TopMoviesView}" />
-	</FlyoutItem>
+	<TabBar>
+		<Tab Icon="{StaticResource TopMoviesIcon}" Title="Top Movies">
+			<ShellContent ContentTemplate="{DataTemplate views:TopMoviesView}" />
+		</Tab>
+		<Tab Icon="{StaticResource NowPlayingIcon}" Title="Now Playing">
+			<ShellContent ContentTemplate="{DataTemplate views:TopMoviesView}" />
+		</Tab>
+		<Tab Icon="{StaticResource PopularIcon}" Title="Popular">
+			<ShellContent ContentTemplate="{DataTemplate views:PopularMoviesView}" />
+		</Tab>
+	</TabBar>
 </Shell>

@@ -9,6 +9,7 @@ namespace Movies.Clients
 		public static class Tmdb
 		{
 			public static string TOP_RATED = "movie/top_rated";
+			public static string POPULAR = "movie/popular";
 		}
 	}
 }

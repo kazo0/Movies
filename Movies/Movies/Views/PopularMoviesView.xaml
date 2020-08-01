@@ -6,7 +6,7 @@
              xmlns:models="clr-namespace:Movies.Services.Models;assembly=Movies.Services"
              mc:Ignorable="d"
              Title="Top Movies"
-             x:Class="Movies.Views.TopMoviesView"
+             x:Class="Movies.Views.PopularMoviesView"
              BackgroundColor="Black">
 	<RefreshView Command="{Binding RefreshCommand}"
 	             IsRefreshing="{Binding IsRefreshing}">

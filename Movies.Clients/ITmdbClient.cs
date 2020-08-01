@@ -9,5 +9,6 @@ namespace Movies.Clients
 	public interface ITmdbClient
 	{
 		Task<PagedResponse<Movie>> GetTopRatedMovies(int page);
+		Task<PagedResponse<Movie>> GetPopularMovies(int page);
 	}
 }

@@ -9,5 +9,6 @@ namespace Movies.Services
 	public interface IMoviesService
 	{
 		Task<PagedList<Movie>> GetTopMovies(int page);
+		Task<PagedList<Movie>> GetPopularMovies(int page);
 	}
 }

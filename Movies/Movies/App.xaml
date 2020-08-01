@@ -5,7 +5,23 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="Movies.App">
-    <Application.Resources>
+	<Application.Resources>
+		<ResourceDictionary>
+			<OnPlatform x:Key="IconFont"
+		                x:TypeArguments="x:String">
+				<On Platform="iOS" Value="Font Awesome 5 Free" />
+				<On Platform="Android" Value="FontAwesome.otf#" />
+			</OnPlatform>
 
-    </Application.Resources>
+			<FontImage x:Key="TopMoviesIcon"
+		               FontFamily="{StaticResource IconFont}"
+		               Glyph="&#xf681;" Size="22" />
+			<FontImage x:Key="NowPlayingIcon"
+			           FontFamily="{StaticResource IconFont}"
+			           Glyph="&#xf008;" Size="22" />
+			<FontImage x:Key="PopularIcon"
+			           FontFamily="{StaticResource IconFont}"
+			           Glyph="&#xf7e4;" Size="22" />
+		</ResourceDictionary>
+	</Application.Resources>
 </Application>

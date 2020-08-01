@@ -4,7 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Movies.Clients;
+using Movies.Clients.Models;
 using Movies.Services.Models;
+using Movie = Movies.Services.Models.Movie;
 
 namespace Movies.Services
 {
@@ -21,6 +23,18 @@ namespace Movies.Services
 		{
 			var response = await _tmdbClient.GetTopRatedMovies(page);
 
+			return ToMoviePageList(response);
+		}
+
+		public async Task<PagedList<Movie>> GetPopularMovies(int page)
+		{
+			var response = await _tmdbClient.GetPopularMovies(page);
+
+			return ToMoviePageList(response);
+		}
+
+		private PagedList<Movie> ToMoviePageList(PagedResponse<Clients.Models.Movie> response)
+		{
 			return response == null
 				? null
 				: new PagedList<Movie>
