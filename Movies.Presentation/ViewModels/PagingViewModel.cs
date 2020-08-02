@@ -43,6 +43,7 @@ namespace Movies.Presentation.ViewModels
 			{
 				return;
 			}
+
 			IsBusy = true;
 
 			var results = await GetItems(CurrentPage + 1);
