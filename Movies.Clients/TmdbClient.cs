@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Http;
 using Microsoft.Extensions.Logging;
 using Movies.Clients.Models;
+using Movies.Core;
 using Newtonsoft.Json;
 
 namespace Movies.Clients
@@ -45,6 +46,28 @@ namespace Movies.Clients
 			return await GetResponse<PagedResponse<Movie>>(
 				Constants.Tmdb.NOW_PLAYING
 					.SetQueryParam("page", page));
+		}
+
+		public async Task<PagedResponse<Movie>> GetUpcomingMovies(int page)
+		{
+			return await GetResponse<PagedResponse<Movie>>(
+				Constants.Tmdb.UPCOMING
+					.SetQueryParam("page", page));
+		}
+
+		public async Task<PagedResponse<Movie>> SearchMovies(string query, int page)
+		{
+			return await GetResponse<PagedResponse<Movie>>(
+				Constants.Tmdb.MOVIE_SEARCH
+					.SetQueryParam("query", query)
+					.SetQueryParam("page", page)
+					.SetQueryParam("include_adult", false));
+		}
+
+		public async Task<MovieDetail> GetMovieDetails(long movieId)
+		{
+			return await GetResponse<MovieDetail>(
+				string.Format(Constants.Tmdb.MOVIE_SEARCH, movieId));
 		}
 
 		private async Task<T> GetResponse<T>(string requestUri)

@@ -34,7 +34,7 @@ namespace Movies
 
 			foreach (var type in types)
 			{
-				services.AddTransient(type.AsType());
+				services.Add(new ServiceDescriptor(type.AsType(), type.AsType(), lifetime));
 			}
 		}
 	}

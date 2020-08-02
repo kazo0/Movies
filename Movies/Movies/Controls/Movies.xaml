@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:Movies.Services.Models;assembly=Movies.Services"
+             xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:ffImage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             x:Class="Movies.Controls.Movies">
+    <RefreshView Command="{Binding RefreshCommand}"
+                 IsRefreshing="{Binding IsRefreshing}">
+        <CollectionView ItemsSource="{Binding Items}"
+                        SelectionMode="None"
+                        RemainingItemsThreshold="{Binding ItemsThreshold}"
+                        RemainingItemsThresholdReachedCommand="{Binding NextPageCommand}">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical"
+                                 VerticalItemSpacing="20"
+                                 HorizontalItemSpacing="20"
+                                 Span="2" />
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Movie">
+                    <pancake:PancakeView CornerRadius="20">
+                        <pancake:PancakeView.Shadow>
+                            <pancake:DropShadow Color="Gray"
+                                                BlurRadius="10" />
+                        </pancake:PancakeView.Shadow>
+                        <Grid RowDefinitions="*, Auto">
+							<ffImage:CachedImage
+                                Source="{Binding PosterPath, Converter={StaticResource PosterPathConverter}}"
+                                Aspect="AspectFill"
+                                LoadingPlaceholder="PosterPlaceholder.png"
+                                ErrorPlaceholder="PosterPlaceholder.png"
+                                HeightRequest="400"
+                                Grid.RowSpan="2" />
+									<BoxView Grid.Row="1" BackgroundColor="Black" Opacity="0.5" VerticalOptions="End" />
+                            <Label HorizontalOptions="Center"
+                                   Grid.Row="1"
+                                   VerticalOptions="Center"
+                                   FontSize="20"
+                                   TextColor="White"
+                                   Margin="20, 0"
+                                   Text="{Binding Title}" />
+                        </Grid>
+                    </pancake:PancakeView>
+
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+            <CollectionView.EmptyView>
+                <StackLayout>
+                    <Label FontFamily="{StaticResource FaRegularFont}"
+                           Text="&#xf059;"
+                           FontSize="100"
+                           TextColor="LightGray"
+                           HorizontalOptions="Center"
+                           VerticalOptions="CenterAndExpand" />
+                </StackLayout>
+            </CollectionView.EmptyView>
+        </CollectionView>
+    </RefreshView>
+</ContentView>

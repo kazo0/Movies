@@ -7,6 +7,7 @@ using Movies.Clients;
 using Movies.Clients.Models;
 using Movies.Services.Models;
 using Movie = Movies.Services.Models.Movie;
+using MovieDetail = Movies.Services.Models.MovieDetail;
 
 namespace Movies.Services
 {
@@ -23,24 +24,45 @@ namespace Movies.Services
 		{
 			var response = await _tmdbClient.GetTopRatedMovies(page);
 
-			return ToMoviePageList(response);
+			return ToMoviePagedList(response);
 		}
 
 		public async Task<PagedList<Movie>> GetPopularMovies(int page)
 		{
 			var response = await _tmdbClient.GetPopularMovies(page);
 
-			return ToMoviePageList(response);
+			return ToMoviePagedList(response);
 		}
 		
 		public async Task<PagedList<Movie>> GetNowPlayingMovies(int page)
 		{
 			var response = await _tmdbClient.GetNowPlayingMovies(page);
 
-			return ToMoviePageList(response);
+			return ToMoviePagedList(response);
 		}
 
-		private PagedList<Movie> ToMoviePageList(PagedResponse<Clients.Models.Movie> response)
+		public async Task<PagedList<Movie>> GetUpcomingMovies(int page)
+		{
+			var response = await _tmdbClient.GetUpcomingMovies(page);
+
+			return ToMoviePagedList(response);
+		}
+
+		public async Task<PagedList<Movie>> SearchMovies(string query, int page)
+		{
+			var response = await _tmdbClient.SearchMovies(query, page);
+
+			return ToMoviePagedList(response);
+		}
+
+		public async Task<MovieDetail> GetMovieDetails(long movieId)
+		{
+			var response = await _tmdbClient.GetMovieDetails(movieId);
+
+			return ToMovieDetail(response);
+		}
+
+		private PagedList<Movie> ToMoviePagedList(PagedResponse<Clients.Models.Movie> response)
 		{
 			return response == null
 				? null
@@ -51,10 +73,28 @@ namespace Movies.Services
 					Page = response.Page,
 					Items = response.Results.Select(x => new Movie
 					{
+						Id = x.Id,
 						Title = x.Title,
-						PosterUrl = $"https://image.tmdb.org/t/p/w185{x.PosterPath}"
+						PosterPath = x.PosterPath,
 					}).ToList()
 				};
+		}
+
+		private MovieDetail ToMovieDetail(Clients.Models.MovieDetail response)
+		{
+			return new MovieDetail
+			{
+				Id = response.Id,
+				ImdbId = response.ImdbId,
+				Title = response.Title,
+				PosterPath = response.PosterPath,
+				BackdropPath = response.BackdropPath,
+				Overview = response.Overview,
+				ReleaseDate = response.ReleaseDate,
+				Runtime = response.Runtime,
+				Tagline = response.Tagline,
+				VoteAverage = response.VoteAverage,
+			};
 		}
 	}
 }

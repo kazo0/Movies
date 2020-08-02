@@ -24,7 +24,7 @@ namespace Movies.Presentation.ViewModels
 		public ICommand RefreshCommand => new AsyncCommand(Refresh);
 		public bool IsRefreshing { get; set; }
 
-		public async Task Init()
+		public virtual async Task Init()
 		{
 			IsBusy = true;
 

@@ -13,8 +13,14 @@
 		<Tab Icon="{StaticResource NowPlayingIcon}" Title="Now Playing">
 			<ShellContent ContentTemplate="{DataTemplate views:NowPlayingView}" />
 		</Tab>
+		<Tab Icon="{StaticResource SearchIcon}" Title="Search">
+			<ShellContent ContentTemplate="{DataTemplate views:SearchMoviesView}" />
+		</Tab>
 		<Tab Icon="{StaticResource PopularIcon}" Title="Popular">
 			<ShellContent ContentTemplate="{DataTemplate views:PopularMoviesView}" />
+		</Tab>
+		<Tab Icon="{StaticResource UpcomingIcon}" Title="Upcoming">
+			<ShellContent ContentTemplate="{DataTemplate views:UpcomingMoviesView}" />
 		</Tab>
 	</TabBar>
 </Shell>

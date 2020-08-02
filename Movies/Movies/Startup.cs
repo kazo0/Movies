@@ -29,7 +29,12 @@ namespace Movies
 					config.AddJsonFile("secrets.json", optional: true);
 				})
 				.ConfigureServices(ConfigureServices)
-				.ConfigureLogging(builder => builder.AddConsole())
+				.ConfigureLogging(builder =>
+				{
+#if DEBUG
+					builder.AddConsole();
+#endif
+				})
 				.Build();
 
 			ServiceProvider = host.Services;

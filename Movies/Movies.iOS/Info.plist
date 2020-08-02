@@ -36,7 +36,8 @@
     <string>Assets.xcassets/AppIcon.appiconset</string>
 	<key>UIAppFonts</key>
 	<array>
-		<string>FontAwesome.otf</string>
+		<string>FontAwesomeSolid.otf</string>
+        <string>FontAwesomeRegular.otf</string>
 	</array>
 </dict>
 </plist>

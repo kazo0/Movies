@@ -6,7 +6,8 @@ namespace Movies.Services.Models
 {
 	public class Movie
 	{
+		public long Id { get; set; }
 		public string Title { get; set; }
-		public string PosterUrl { get; set; }
+		public string PosterPath { get; set; }
 	}
 }

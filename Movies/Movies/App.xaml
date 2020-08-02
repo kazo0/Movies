@@ -3,25 +3,40 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:converters="clr-namespace:Movies.Converters;assembly=Movies"
              mc:Ignorable="d"
              x:Class="Movies.App">
 	<Application.Resources>
 		<ResourceDictionary>
-			<OnPlatform x:Key="IconFont"
+			<OnPlatform x:Key="FaSolidFont"
 		                x:TypeArguments="x:String">
-				<On Platform="iOS" Value="Font Awesome 5 Free" />
-				<On Platform="Android" Value="FontAwesome.otf#" />
+				<On Platform="iOS" Value="FontAwesome5Free-Solid" />
+				<On Platform="Android" Value="FontAwesomeSolid.otf#Regular" />
+			</OnPlatform>
+			
+			<OnPlatform x:Key="FaRegularFont"
+			            x:TypeArguments="x:String">
+				<On Platform="iOS" Value="FontAwesome5Free-Regular" />
+				<On Platform="Android" Value="FontAwesomeRegular.otf#Regular" />
 			</OnPlatform>
 
 			<FontImage x:Key="TopMoviesIcon"
-		               FontFamily="{StaticResource IconFont}"
+		               FontFamily="{StaticResource FaSolidFont}"
 		               Glyph="&#xf681;" Size="22" />
 			<FontImage x:Key="NowPlayingIcon"
-			           FontFamily="{StaticResource IconFont}"
+			           FontFamily="{StaticResource FaSolidFont}"
 			           Glyph="&#xf008;" Size="22" />
 			<FontImage x:Key="PopularIcon"
-			           FontFamily="{StaticResource IconFont}"
+			           FontFamily="{StaticResource FaSolidFont}"
 			           Glyph="&#xf7e4;" Size="22" />
+			<FontImage x:Key="UpcomingIcon"
+			           FontFamily="{StaticResource FaSolidFont}"
+			           Glyph="&#xf073;" Size="22" />
+			<FontImage x:Key="SearchIcon"
+			           FontFamily="{StaticResource FaSolidFont}"
+			           Glyph="&#xf002;" Size="22" Color="Gray" />
+			
+			<converters:PosterPathConverter x:Key="PosterPathConverter" EmptyImageSource="PosterPlaceholder.png"/>
 		</ResourceDictionary>
 	</Application.Resources>
 </Application>
