@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:models="clr-namespace:Movies.Services.Models;assembly=Movies.Services"
+             mc:Ignorable="d"
+             Title="Top Movies"
+             x:Class="Movies.Views.NowPlayingView"
+             BackgroundColor="Black">
+    <RefreshView Command="{Binding RefreshCommand}"
+                 IsRefreshing="{Binding IsRefreshing}">
+        <CollectionView ItemsSource="{Binding Items}"
+                        SelectionMode="None"
+                        RemainingItemsThreshold="{Binding ItemsThreshold}"
+                        RemainingItemsThresholdReachedCommand="{Binding NextPageCommand}"
+					
+                        Margin="0, 10">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical"
+                                 HorizontalItemSpacing="0"
+                                 Span="2"/>
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Movie">
+                    <Image Source="{Binding PosterUrl}"
+                           HeightRequest="300"
+                           Aspect="AspectFit"/>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </RefreshView>
+</ContentPage>

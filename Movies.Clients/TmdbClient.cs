@@ -39,6 +39,13 @@ namespace Movies.Clients
 				Constants.Tmdb.POPULAR
 					.SetQueryParam("page", page));
 		}
+		
+		public async Task<PagedResponse<Movie>> GetNowPlayingMovies(int page)
+		{
+			return await GetResponse<PagedResponse<Movie>>(
+				Constants.Tmdb.NOW_PLAYING
+					.SetQueryParam("page", page));
+		}
 
 		private async Task<T> GetResponse<T>(string requestUri)
 		{

@@ -10,5 +10,6 @@ namespace Movies.Clients
 	{
 		Task<PagedResponse<Movie>> GetTopRatedMovies(int page);
 		Task<PagedResponse<Movie>> GetPopularMovies(int page);
+		Task<PagedResponse<Movie>> GetNowPlayingMovies(int page);
 	}
 }

@@ -11,7 +11,7 @@
 			<ShellContent ContentTemplate="{DataTemplate views:TopMoviesView}" />
 		</Tab>
 		<Tab Icon="{StaticResource NowPlayingIcon}" Title="Now Playing">
-			<ShellContent ContentTemplate="{DataTemplate views:TopMoviesView}" />
+			<ShellContent ContentTemplate="{DataTemplate views:NowPlayingView}" />
 		</Tab>
 		<Tab Icon="{StaticResource PopularIcon}" Title="Popular">
 			<ShellContent ContentTemplate="{DataTemplate views:PopularMoviesView}" />

@@ -15,7 +15,7 @@ namespace Movies.Presentation.ViewModels
 
 		protected override async Task<PagedList<Movie>> GetItems(int page)
 		{
-			return await _moviesService.GetPopularMovies(CurrentPage);
+			return await _moviesService.GetPopularMovies(page);
 		}
 	}
 }

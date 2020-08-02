@@ -23,7 +23,7 @@ namespace Movies.Views
 		{
 			base.OnAppearing();
 
-			MainThread.BeginInvokeOnMainThread(async () => await ((TopMoviesViewModel)BindingContext).Init());
+			MainThread.InvokeOnMainThreadAsync(() => ((TopMoviesViewModel) BindingContext).Init());
 		}
 	}
 }

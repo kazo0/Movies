@@ -32,6 +32,13 @@ namespace Movies.Services
 
 			return ToMoviePageList(response);
 		}
+		
+		public async Task<PagedList<Movie>> GetNowPlayingMovies(int page)
+		{
+			var response = await _tmdbClient.GetNowPlayingMovies(page);
+
+			return ToMoviePageList(response);
+		}
 
 		private PagedList<Movie> ToMoviePageList(PagedResponse<Clients.Models.Movie> response)
 		{

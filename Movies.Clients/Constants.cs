@@ -10,6 +10,7 @@ namespace Movies.Clients
 		{
 			public static string TOP_RATED = "movie/top_rated";
 			public static string POPULAR = "movie/popular";
+			public static string NOW_PLAYING = "movie/now_playing";
 		}
 	}
 }
