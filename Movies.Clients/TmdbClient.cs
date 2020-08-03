@@ -30,35 +30,35 @@ namespace Movies.Clients
 		public async Task<PagedResponse<Movie>> GetTopRatedMovies(int page)
 		{
 			return await GetResponse<PagedResponse<Movie>>(
-				Constants.Tmdb.TOP_RATED
+				Constants.Tmdb.Routes.TOP_RATED
 					.SetQueryParam("page", page));
 		}
 
 		public async Task<PagedResponse<Movie>> GetPopularMovies(int page)
 		{
 			return await GetResponse<PagedResponse<Movie>>(
-				Constants.Tmdb.POPULAR
+				Constants.Tmdb.Routes.POPULAR
 					.SetQueryParam("page", page));
 		}
 		
 		public async Task<PagedResponse<Movie>> GetNowPlayingMovies(int page)
 		{
 			return await GetResponse<PagedResponse<Movie>>(
-				Constants.Tmdb.NOW_PLAYING
+				Constants.Tmdb.Routes.NOW_PLAYING
 					.SetQueryParam("page", page));
 		}
 
 		public async Task<PagedResponse<Movie>> GetUpcomingMovies(int page)
 		{
 			return await GetResponse<PagedResponse<Movie>>(
-				Constants.Tmdb.UPCOMING
+				Constants.Tmdb.Routes.UPCOMING
 					.SetQueryParam("page", page));
 		}
 
 		public async Task<PagedResponse<Movie>> SearchMovies(string query, int page)
 		{
 			return await GetResponse<PagedResponse<Movie>>(
-				Constants.Tmdb.MOVIE_SEARCH
+				Constants.Tmdb.Routes.MOVIE_SEARCH
 					.SetQueryParam("query", query)
 					.SetQueryParam("page", page)
 					.SetQueryParam("include_adult", false));
@@ -67,7 +67,7 @@ namespace Movies.Clients
 		public async Task<MovieDetail> GetMovieDetails(long movieId)
 		{
 			return await GetResponse<MovieDetail>(
-				string.Format(Constants.Tmdb.MOVIE_SEARCH, movieId));
+				string.Format(Constants.Tmdb.Routes.MOVIE_DETAILS, movieId));
 		}
 
 		private async Task<T> GetResponse<T>(string requestUri)

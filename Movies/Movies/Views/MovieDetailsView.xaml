@@ -2,12 +2,35 @@
 
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Movies.Views.MovieDetailsView">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Hello, world!"
-                   VerticalOptions="CenterAndExpand"
-                   HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
-    </ContentPage.Content>
+             xmlns:vm="clr-namespace:Movies.Presentation.ViewModels;assembly=Movies.Presentation"
+             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             x:Class="Movies.Views.MovieDetailsView"
+             Shell.TabBarIsVisible="False"
+             x:DataType="vm:MovieDetailsViewModel"
+             Title="{Binding Movie.Title}">
+    
+    <Grid RowDefinitions="300, *">
+        <forms:CachedImage
+            Source="{Binding Movie.BackdropUrl, Converter={StaticResource ImageSourceConverter}}"
+            Aspect="AspectFill"
+            LoadingPlaceholder="PosterPlaceholder.png"
+            ErrorPlaceholder="PosterPlaceholder.png" />
+        <Grid Row="0"
+              RowSpan="2"
+              Margin="20, 250, 0, 0"
+              ColumnDefinitions="Auto, *">
+			<Frame CornerRadius="20"
+			       HasShadow="True" 
+                   Padding="0"
+			       HorizontalOptions="Start"
+			       VerticalOptions="Start">
+				<forms:CachedImage
+					Source="{Binding Movie.PosterUrl, Converter={StaticResource ImageSourceConverter}}"
+					Aspect="AspectFill"
+					LoadingPlaceholder="PosterPlaceholder.png"
+					ErrorPlaceholder="PosterPlaceholder.png"
+					HeightRequest="200"/>
+			</Frame>
+		</Grid>
+    </Grid>
 </ContentPage>

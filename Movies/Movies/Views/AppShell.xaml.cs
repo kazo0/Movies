@@ -15,6 +15,7 @@ namespace Movies.Views
 		public AppShell()
 		{
 			InitializeComponent();
+			Routing.RegisterRoute("movieDetails", typeof(MovieDetailsView));
 		}
 	}
 }

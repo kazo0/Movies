@@ -5,7 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:controls="clr-namespace:Movies.Controls;assembly=Movies"
              mc:Ignorable="d"
-             Title="Top Movies"
+             Title="Top"
              x:Class="Movies.Views.TopMoviesView">
 	<controls:Movies />
 </ContentPage>

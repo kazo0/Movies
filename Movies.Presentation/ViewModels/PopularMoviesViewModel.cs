@@ -4,18 +4,15 @@ using Movies.Services.Models;
 
 namespace Movies.Presentation.ViewModels
 {
-	public class PopularMoviesViewModel : PagingViewModel<Movie>
+	public class PopularMoviesViewModel : MoviesPagingViewModel
 	{
-		private readonly IMoviesService _moviesService;
-		
-		public PopularMoviesViewModel(IMoviesService moviesService)
+		public PopularMoviesViewModel(IMoviesService moviesService) : base(moviesService)
 		{
-			_moviesService = moviesService;
 		}
 
 		protected override async Task<PagedList<Movie>> GetItems(int page)
 		{
-			return await _moviesService.GetPopularMovies(page);
+			return await MoviesService.GetPopularMovies(page);
 		}
 	}
 }

@@ -5,18 +5,15 @@ using Movies.Services.Models;
 
 namespace Movies.Presentation.ViewModels
 {
-    public class UpcomingMoviesViewModel : PagingViewModel<Movie>, IRefreshable
+    public class UpcomingMoviesViewModel : MoviesPagingViewModel
     {
-        private readonly IMoviesService _moviesService;
-
-        public UpcomingMoviesViewModel(IMoviesService moviesService)
+        public UpcomingMoviesViewModel(IMoviesService moviesService) : base(moviesService)
         {
-            _moviesService = moviesService;
         }
         
         protected override async Task<PagedList<Movie>> GetItems(int page)
         {
-            return await _moviesService.GetUpcomingMovies(page);
+            return await MoviesService.GetUpcomingMovies(page);
         }
     }
 }

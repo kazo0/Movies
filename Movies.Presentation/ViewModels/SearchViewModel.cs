@@ -9,22 +9,19 @@ using MvvmHelpers.Commands;
 
 namespace Movies.Presentation.ViewModels
 {
-    public class SearchViewModel : PagingViewModel<Movie>, IRefreshable
+    public class SearchViewModel : MoviesPagingViewModel
     {
-        private readonly IMoviesService _moviesService;
-
         public string SearchTerm { get; set; }
         
         public ICommand Search => new AsyncCommand(SearchMovies);
         
-        public SearchViewModel(IMoviesService moviesService)
+        public SearchViewModel(IMoviesService moviesService) : base(moviesService)
         {
-            _moviesService = moviesService;
         }
 
         protected override async Task<PagedList<Movie>> GetItems(int page)
         {
-           return await _moviesService.SearchMovies(SearchTerm, page);
+           return await MoviesService.SearchMovies(SearchTerm, page);
         }
 
         private async Task SearchMovies()

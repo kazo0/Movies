@@ -4,19 +4,18 @@ using Xamarin.Forms;
 
 namespace Movies.Converters
 {
-    public class PosterPathConverter : IValueConverter 
+    public class ImageSourceConverter : IValueConverter 
     {
         public ImageSource EmptyImageSource { get; set; }
         
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (!(value is string path))
+            if (!(value is string url))
             {
                 return EmptyImageSource;
             }
 
-            
-            return string.IsNullOrWhiteSpace(path) ? EmptyImageSource : $"https://image.tmdb.org/t/p/w185{path}";
+            return string.IsNullOrWhiteSpace(url) ? EmptyImageSource : url;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

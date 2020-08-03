@@ -36,7 +36,7 @@
 			           FontFamily="{StaticResource FaSolidFont}"
 			           Glyph="&#xf002;" Size="22" Color="Gray" />
 			
-			<converters:PosterPathConverter x:Key="PosterPathConverter" EmptyImageSource="PosterPlaceholder.png"/>
+			<converters:ImageSourceConverter x:Key="ImageSourceConverter" EmptyImageSource="PosterPlaceholder.png"/>
 		</ResourceDictionary>
 	</Application.Resources>
 </Application>

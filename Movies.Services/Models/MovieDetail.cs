@@ -1,4 +1,5 @@
 ﻿using System;
+using Movies.Core;
 
 namespace Movies.Services.Models
 {
@@ -11,5 +12,9 @@ namespace Movies.Services.Models
         public int Runtime { get; set; }
         public string Tagline { get; set; }
         public double VoteAverage { get; set; }
+
+        public string BackdropUrl => string.IsNullOrWhiteSpace(BackdropPath) 
+            ? null 
+            : string.Format(Constants.Tmdb.BackdropUrlFormat, BackdropPath);
     }
 }
