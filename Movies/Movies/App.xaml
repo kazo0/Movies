@@ -20,6 +20,12 @@
 				<On Platform="Android" Value="FontAwesomeRegular.otf#Regular" />
 			</OnPlatform>
 
+			<OnPlatform x:Key="FaBrandsFont"
+			            x:TypeArguments="x:String">
+				<On Platform="iOS" Value="FontAwesome5Free-Brands" />
+				<On Platform="Android" Value="FontAwesomeBrands.otf#Regular" />
+			</OnPlatform>
+
 			<FontImage x:Key="TopMoviesIcon"
 		               FontFamily="{StaticResource FaSolidFont}"
 		               Glyph="&#xf681;" Size="22" />
@@ -35,7 +41,16 @@
 			<FontImage x:Key="SearchIcon"
 			           FontFamily="{StaticResource FaSolidFont}"
 			           Glyph="&#xf002;" Size="22" Color="Gray" />
-			
+			<FontImage x:Key="ImdbIcon"
+			           FontFamily="{StaticResource FaBrandsFont}"
+			           Glyph="&#xf2d8;" Size="22" />
+			<FontImage x:Key="TimeIcon"
+			           FontFamily="{StaticResource FaSolidFont}"
+			           Glyph="&#xf2f2;" Size="22" Color="Gray" />
+			<FontImage x:Key="VotesIcon"
+			           FontFamily="{StaticResource FaSolidFont}"
+			           Glyph="&#xf681;" Size="22" Color="Gray" />
+
 			<converters:ImageSourceConverter x:Key="ImageSourceConverter" EmptyImageSource="PosterPlaceholder.png"/>
 		</ResourceDictionary>
 	</Application.Resources>

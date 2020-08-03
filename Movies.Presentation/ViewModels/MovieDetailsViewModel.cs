@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Movies.Presentation.Contracts;
 using Movies.Services;
@@ -13,6 +14,8 @@ namespace Movies.Presentation.ViewModels
         private readonly IMoviesService _moviesService;
         
         public ICommand RefreshCommand => new AsyncCommand(Refresh);
+
+        public ICommand GoToImdbCommand => new AsyncCommand(GoToImdb);
         
         public bool IsRefreshing { get; set; }
 
@@ -45,6 +48,11 @@ namespace Movies.Presentation.ViewModels
             Movie = await _moviesService.GetMovieDetails(_movieId);
 
             IsBusy = false;
+        }
+
+        private Task GoToImdb()
+        {
+	        return Xamarin.Essentials.Browser.OpenAsync($"https://www.imdb.com/title/{Movie.ImdbId}");
         }
     }
 }

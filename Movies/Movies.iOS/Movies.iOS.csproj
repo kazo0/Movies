@@ -71,6 +71,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <BundleResource Include="Resources\FontAwesomeRegular.otf" />
     <BundleResource Include="Resources\FontAwesomeSolid.otf" />
+    <BundleResource Include="Resources\FontAwesomeBrands.otf" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\PosterPlaceholder.imageset\Contents.json">

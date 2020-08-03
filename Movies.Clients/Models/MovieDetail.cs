@@ -51,7 +51,7 @@ public class MovieDetail
         public long Revenue { get; set; }
 
         [JsonProperty("runtime")]
-        public int Runtime { get; set; }
+        public int? Runtime { get; set; }
 
         [JsonProperty("status")]
         public string Status { get; set; }
