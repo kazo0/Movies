@@ -7,7 +7,7 @@
        mc:Ignorable="d"
        x:Class="Movies.Views.AppShell">
 	<TabBar>
-		<Tab Icon="{StaticResource TopMoviesIcon}" Title="Top Movies">
+		<Tab Icon="{StaticResource TopMoviesIcon}" Title="Top">
 			<ShellContent ContentTemplate="{DataTemplate views:TopMoviesView}" />
 		</Tab>
 		<Tab Icon="{StaticResource NowPlayingIcon}" Title="Now Playing">
