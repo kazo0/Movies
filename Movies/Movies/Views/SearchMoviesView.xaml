@@ -6,6 +6,7 @@
              xmlns:controls="clr-namespace:Movies.Controls;assembly=Movies"
              mc:Ignorable="d"
              Title="Search"
+             Visual="Material"
              x:Class="Movies.Views.SearchMoviesView">
     <StackLayout>
         <SearchBar SearchCommand="{Binding Search}"

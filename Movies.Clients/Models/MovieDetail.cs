@@ -45,7 +45,7 @@ public class MovieDetail
         public string PosterPath { get; set; }
 
         [JsonProperty("release_date")]
-        public DateTimeOffset ReleaseDate { get; set; }
+        public DateTimeOffset? ReleaseDate { get; set; }
 
         [JsonProperty("revenue")]
         public long Revenue { get; set; }

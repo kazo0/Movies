@@ -17,7 +17,7 @@ namespace Movies.Clients.Models
 		public string Overview { get; set; }
 
 		[JsonProperty("release_date")]
-		public DateTimeOffset ReleaseDate { get; set; }
+		public DateTimeOffset? ReleaseDate { get; set; }
 
 		[JsonProperty("genre_ids")]
 		public long[] GenreIds { get; set; }

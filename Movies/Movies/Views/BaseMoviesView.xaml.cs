@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Movies.Presentation.ViewModels;
+using Movies.Services.Models;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -11,12 +12,17 @@ using Xamarin.Forms.Xaml;
 namespace Movies.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class PopularMoviesView : BaseMoviesView
+	public partial class BaseMoviesView : ContentPage
 	{
-		public PopularMoviesView()
+		public BaseMoviesView()
 		{
 			InitializeComponent();
-			BindingContext = Startup.ServiceProvider.GetService<PopularMoviesViewModel>();
+		}
+
+		protected override void OnAppearing()
+		{
+			base.OnAppearing();
+			MainThread.InvokeOnMainThreadAsync(() => ((PagingViewModel<Movie>) BindingContext).Init());
 		}
 	}
 }

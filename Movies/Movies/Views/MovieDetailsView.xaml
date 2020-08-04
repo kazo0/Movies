@@ -1,16 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:Movies.Presentation.ViewModels;assembly=Movies.Presentation"
              xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-             xmlns:pancakeView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              x:Class="Movies.Views.MovieDetailsView"
              Shell.TabBarIsVisible="False"
              x:DataType="vm:MovieDetailsViewModel"
+			 Visual="Material"
              Title="{Binding Movie.Title}">
-    
-    <Grid RowDefinitions="300, *">
+
+	<Grid RowDefinitions="300, *">
         <forms:CachedImage
             Source="{Binding Movie.BackdropUrl, Converter={StaticResource ImageSourceConverter}}"
             Aspect="AspectFill"
@@ -20,36 +19,30 @@
               RowSpan="2"
               Margin="20, 250, 20, 0"
               ColumnDefinitions="150, *, 80"
-              RowDefinitions="150, 50, *">
+              RowDefinitions="150, 20, *">
 			<Frame BackgroundColor="White"
                    Grid.ColumnSpan="3"
                    CornerRadius="10"
                    HasShadow="True" />
 			<Grid Grid.Column="1"
 			      RowDefinitions="*, *">
-				<StackLayout Margin="0, 20, 0, 0" VerticalOptions="Center">
+				<StackLayout Margin="0, 20, 0, 0"
+							 VerticalOptions="Center">
 					<Label Text="{Binding Movie.Title}"
 					       FontAttributes="Bold"
-					       FontSize="Title"/>
+					       FontSize="Title" 
+					       MaxLines="2" 
+					       LineBreakMode="TailTruncation" />
 					<Label  FontSize="Caption"
 						Text="{Binding Movie.ReleaseDate, StringFormat='{0:MMMM dd, yyyy}'}"/>
 				</StackLayout>
-                <Grid Grid.Row="1"
-                      ColumnDefinitions="*, *">
+                <Grid Grid.Row="1">
 					<StackLayout Orientation="Horizontal" VerticalOptions="Center">
 						<Image Source="{StaticResource TimeIcon}"/>
-						<Label Text="{Binding Movie.Runtime}"
+						<Label Text="{Binding Movie.Runtime, StringFormat='{0} min.'}"
                                VerticalOptions="End"
                                FontSize="Body"/>
 					</StackLayout>
-					<StackLayout Orientation="Horizontal"
-	                             Grid.Column="1"
-	                             VerticalOptions="Center">
-						<Image Source="{StaticResource VotesIcon}"/>
-		                <Label Text="{Binding Movie.VoteAverage}"
-		                       VerticalOptions="End"
-		                       FontSize="Body"/>
-	                </StackLayout>
 				</Grid>
 			</Grid>
 			
@@ -58,6 +51,19 @@
 			             Padding="20" 
 			             BackgroundColor="#DBA506"
 			             Command="{Binding GoToImdbCommand}"/>
+			<Grid Grid.Row="2"
+				  Grid.ColumnSpan="3"
+			      RowDefinitions="Auto, Auto">
+				<Label HorizontalOptions="Center"
+				       Text="{Binding Movie.Tagline}"
+				       FontSize="Title"/>
+
+				<Grid Grid.Row="1">
+					<Label Text="{Binding Movie.Overview}"
+					       FontSize="Body"/>
+				</Grid>
+			</Grid>
+
         </Grid>
         <Frame Grid.RowSpan="2"
                Margin="30, 180, 0 ,0"

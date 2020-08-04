@@ -35,7 +35,7 @@
                                     Aspect="AspectFill"
                                     LoadingPlaceholder="PosterPlaceholder.png"
                                     ErrorPlaceholder="PosterPlaceholder.png"
-                                    HeightRequest="400"
+                                    HeightRequest="300"
                                     Grid.RowSpan="2" />
                                 <Grid Grid.Row="1">
                                     <BoxView BackgroundColor="Black" 

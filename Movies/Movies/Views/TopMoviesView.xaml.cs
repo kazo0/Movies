@@ -11,19 +11,12 @@ using Xamarin.Forms.Xaml;
 namespace Movies.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class TopMoviesView : ContentPage
+	public partial class TopMoviesView : BaseMoviesView
 	{
 		public TopMoviesView()
 		{
 			InitializeComponent();
 			BindingContext = Startup.ServiceProvider.GetService<TopMoviesViewModel>();
-		}
-
-		protected override void OnAppearing()
-		{
-			base.OnAppearing();
-
-			MainThread.InvokeOnMainThreadAsync(() => ((TopMoviesViewModel) BindingContext).Init());
 		}
 	}
 }
