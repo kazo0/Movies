@@ -15,7 +15,15 @@ variables:
 
 steps:
 - task: NuGetToolInstaller@1
-
+- task: DownloadSecureFile@1
+  name: secrets
+  inputs:
+    secureFile: 'secrets.json'
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(Agent.TempDirectory)'
+    Contents: 'secrets.json'
+    TargetFolder: 'Movies/Movies'
 - task: NuGetCommand@2
   inputs:
     restoreSolution: '**/*.sln'
