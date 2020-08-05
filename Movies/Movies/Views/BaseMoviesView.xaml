@@ -3,9 +3,68 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:controls="clr-namespace:Movies.Controls;assembly=Movies"
+             xmlns:vm="clr-namespace:Movies.Presentation.ViewModels;assembly=Movies.Presentation"
+             xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              mc:Ignorable="d"
              Visual="Material"
-             x:Class="Movies.Views.BaseMoviesView">
-	<controls:Movies/>
+             x:Class="Movies.Views.BaseMoviesView"
+             x:DataType="vm:MoviesPagingViewModel">
+	<RefreshView Command="{Binding RefreshCommand}"
+                 IsRefreshing="{Binding IsRefreshing}">
+		<CollectionView ItemsSource="{Binding Items}"
+                        SelectionMode="None"
+                        Margin="20"
+                        RemainingItemsThreshold="{Binding ItemsThreshold}"
+                        RemainingItemsThresholdReachedCommand="{Binding NextPageCommand}">
+			<CollectionView.ItemsLayout>
+				<GridItemsLayout Orientation="Vertical"
+                                 VerticalItemSpacing="20"
+                                 HorizontalItemSpacing="20"
+                                 Span="2" />
+			</CollectionView.ItemsLayout>
+
+			<CollectionView.ItemTemplate>
+				<DataTemplate x:DataType="vm:MovieItemViewModel">
+					<Frame HasShadow="True" 
+                               IsClippedToBounds="True"
+                               Padding="0" 
+                               CornerRadius="10">
+						<Frame.GestureRecognizers>
+							<TapGestureRecognizer Command="{Binding NavToMovieCommand}"/>
+						</Frame.GestureRecognizers>
+						<Grid RowDefinitions="*, Auto">
+							<ffimage:CachedImage
+                                    Source="{Binding PosterUrl, Converter={StaticResource ImageSourceConverter}}"
+                                    Aspect="AspectFill"
+                                    LoadingPlaceholder="PosterPlaceholder.png"
+                                    ErrorPlaceholder="PosterPlaceholder.png"
+                                    HeightRequest="300"
+                                    Grid.RowSpan="2" />
+							<Grid Grid.Row="1">
+								<BoxView BackgroundColor="Black" 
+                                             Opacity="0.5"  />
+								<Label HorizontalOptions="Center"
+                                           VerticalOptions="Center"
+                                           FontSize="20"
+                                           TextColor="White"
+                                           Margin="20, 0"
+                                           Text="{Binding Title}" />
+							</Grid>
+						</Grid>
+					</Frame>
+				</DataTemplate>
+			</CollectionView.ItemTemplate>
+
+			<CollectionView.EmptyView>
+				<StackLayout>
+					<Label FontFamily="{StaticResource FaRegularFont}"
+                           Text="&#xf059;"
+                           FontSize="100"
+                           TextColor="LightGray"
+                           HorizontalOptions="Center"
+                           VerticalOptions="CenterAndExpand" />
+				</StackLayout>
+			</CollectionView.EmptyView>
+		</CollectionView>
+	</RefreshView>
 </ContentPage>

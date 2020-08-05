@@ -22,7 +22,7 @@ namespace Movies.Views
 		protected override void OnAppearing()
 		{
 			base.OnAppearing();
-			MainThread.InvokeOnMainThreadAsync(() => ((PagingViewModel<Movie>) BindingContext).Init());
+			MainThread.InvokeOnMainThreadAsync(() => ((PagingViewModel<MovieItemViewModel, Movie>) BindingContext).Init());
 		}
 	}
 }

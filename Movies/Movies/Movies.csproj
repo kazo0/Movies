@@ -29,10 +29,6 @@
       <SubType>Designer</SubType>
       <Generator></Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Controls\Movies.xaml">
-      <SubType>Designer</SubType>
-      <Generator></Generator>
-    </EmbeddedResource>
     <EmbeddedResource Update="Views\MovieDetailsView.xaml">
       <SubType>Designer</SubType>
       <Generator></Generator>
@@ -77,9 +73,6 @@
     </Compile>
     <Compile Update="Views\SearchMoviesView.xaml.cs">
       <DependentUpon>SearchMoviesView.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Controls\Movies.xaml.cs">
-      <DependentUpon>Movies.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\MovieDetailsView.xaml.cs">
       <DependentUpon>MovieDetailsView.xaml</DependentUpon>

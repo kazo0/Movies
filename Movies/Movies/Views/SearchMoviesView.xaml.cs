@@ -10,7 +10,7 @@ using Xamarin.Forms.Xaml;
 namespace Movies.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class SearchMoviesView : ContentPage
+    public partial class SearchMoviesView : BaseMoviesView
     {
         public SearchMoviesView()
         {

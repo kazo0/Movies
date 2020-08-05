@@ -6,6 +6,10 @@ namespace Movies.Core
 {
 	public class Constants
 	{
+		public static class External
+		{
+			public static readonly string Imdb_Url = "https://www.imdb.com/title/{0}";
+		}
 		public static class Tmdb
 		{
 			public static readonly string BackdropUrlFormat = "https://image.tmdb.org/t/p/w500{0}";

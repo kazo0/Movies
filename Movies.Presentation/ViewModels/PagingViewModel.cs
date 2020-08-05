@@ -12,13 +12,15 @@ using MvvmHelpers.Commands;
 
 namespace Movies.Presentation.ViewModels
 {
-	public abstract class PagingViewModel<T> : ViewModelBase, IRefreshable
+	public abstract class PagingViewModel<TItemViewModel, TItem> : ViewModelBase, IRefreshable 
+		where TItemViewModel : ItemViewModel<TItem>
+		where TItem : class
 	{
 		private int _maxPages = 0;
 
 		protected virtual int CurrentPage { get; set; } = 1;
 
-		public ObservableRangeCollection<T> Items { get; set; }
+		public ObservableRangeCollection<TItemViewModel> Items { get; set; }
 		public virtual int ItemsThreshold { get; set; } = 5;
 		public ICommand NextPageCommand => new AsyncCommand(LoadNextPage);
 		public ICommand RefreshCommand => new AsyncCommand(Refresh);
@@ -31,11 +33,12 @@ namespace Movies.Presentation.ViewModels
 			var results = await GetItems(CurrentPage);
 			_maxPages = results.TotalPages;
 
-			Items = new ObservableRangeCollection<T>(results?.Items.Safe() ?? new List<T>());
+			Items = new ObservableRangeCollection<TItemViewModel>(results?.Items.Safe().Select(ToItemViewModel));
 			IsBusy = false;
 		}
 
-		protected abstract Task<PagedList<T>> GetItems(int page);
+		protected abstract Task<PagedList<TItem>> GetItems(int page);
+		protected abstract TItemViewModel ToItemViewModel(TItem item);
 
 		private async Task LoadNextPage()
 		{
@@ -50,7 +53,7 @@ namespace Movies.Presentation.ViewModels
 			if (results?.Items.Any() ?? false)
 			{
 				CurrentPage = results.Page;
-				Items.AddRange(results.Items);
+				Items.AddRange(results.Items.Safe().Select(ToItemViewModel));
 			}
 			else
 			{
@@ -66,7 +69,7 @@ namespace Movies.Presentation.ViewModels
 			var results = await GetItems(CurrentPage);
 
 			Items.Clear();
-			Items = new ObservableRangeCollection<T>(results?.Items.Safe() ?? new List<T>());
+			Items = new ObservableRangeCollection<TItemViewModel>(results?.Items.Safe().Select(ToItemViewModel));
 
 			IsRefreshing = false;
 		}

@@ -1,17 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<views:BaseMoviesView xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:controls="clr-namespace:Movies.Controls;assembly=Movies"
+             xmlns:views="clr-namespace:Movies.Views;assembly=Movies"
              mc:Ignorable="d"
              Title="Search"
              Visual="Material"
              x:Class="Movies.Views.SearchMoviesView">
-    <StackLayout>
-        <SearchBar SearchCommand="{Binding Search}"
-                   Text="{Binding SearchTerm, Mode=TwoWay}"
-                   Placeholder="Search movies"/>
-        <controls:Movies />
-    </StackLayout>
-</ContentPage>
+	<Shell.SearchHandler>
+		<SearchHandler x:Name="searchHandler"
+		               Placeholder="Search movies"
+                       Command="{Binding Search}"
+                       CommandParameter="{Binding Query, Source={x:Reference searchHandler}}"/>
+	</Shell.SearchHandler>
+</views:BaseMoviesView>

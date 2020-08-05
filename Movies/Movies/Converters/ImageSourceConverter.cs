@@ -7,6 +7,7 @@ namespace Movies.Converters
     public class ImageSourceConverter : IValueConverter 
     {
         public ImageSource EmptyImageSource { get; set; }
+        public string Format { get; set; }
         
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

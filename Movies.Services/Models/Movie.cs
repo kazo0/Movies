@@ -10,9 +10,5 @@ namespace Movies.Services.Models
 		public long Id { get; set; }
 		public string Title { get; set; }
 		public string PosterPath { get; set; }
-		
-		public string PosterUrl => string.IsNullOrWhiteSpace(PosterPath) 
-			? null 
-			: string.Format(Constants.Tmdb.BackdropUrlFormat, PosterPath);
 	}
 }

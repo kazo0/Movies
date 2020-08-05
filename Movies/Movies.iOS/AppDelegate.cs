@@ -23,6 +23,17 @@ namespace Movies.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
+
+
+
+            foreach (var family in UIFont.FamilyNames.Where(x => x.Contains("Awesome")).ToList())
+            {
+	            foreach (var familyName in UIFont.FontNamesForFamilyName(family))
+	            {
+                    Console.WriteLine(familyName);
+	            }
+            }
+
             global::Xamarin.Forms.FormsMaterial.Init();
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init(); 
             LoadApplication(new App());

@@ -2,82 +2,79 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:Movies.Presentation.ViewModels;assembly=Movies.Presentation"
-             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              x:Class="Movies.Views.MovieDetailsView"
              Shell.TabBarIsVisible="False"
              x:DataType="vm:MovieDetailsViewModel"
 			 Visual="Material"
-             Title="{Binding Movie.Title}">
-
-	<Grid RowDefinitions="300, *">
-        <forms:CachedImage
-            Source="{Binding Movie.BackdropUrl, Converter={StaticResource ImageSourceConverter}}"
+             Title="{Binding Title}">
+	<ScrollView>
+		<Grid RowDefinitions="300, *">
+			<ffimage:CachedImage
+            Source="{Binding BackdropUrl, Converter={StaticResource ImageSourceConverter}}"
             Aspect="AspectFill"
             LoadingPlaceholder="PosterPlaceholder.png"
             ErrorPlaceholder="PosterPlaceholder.png" />
-        <Grid Row="0"
+			<Grid Row="0"
               RowSpan="2"
               Margin="20, 250, 20, 0"
-              ColumnDefinitions="150, *, 80"
-              RowDefinitions="150, 20, *">
-			<Frame BackgroundColor="White"
+              ColumnDefinitions="Auto, *, 80"
+              RowDefinitions="Auto, 20, *">
+				<Frame BackgroundColor="White"
                    Grid.ColumnSpan="3"
                    CornerRadius="10"
                    HasShadow="True" />
-			<Grid Grid.Column="1"
-			      RowDefinitions="*, *">
-				<StackLayout Margin="0, 20, 0, 0"
+				<Frame Margin="10, -50, 0, 10"
+				       CornerRadius="20"
+				       HasShadow="True" 
+				       Padding="0">
+					<ffimage:CachedImage
+						Source="{Binding PosterUrl, Converter={StaticResource ImageSourceConverter}}"
+						Aspect="AspectFill"
+						LoadingPlaceholder="PosterPlaceholder.png"
+						ErrorPlaceholder="PosterPlaceholder.png"
+						HeightRequest="200"/>
+				</Frame>
+				<Grid Grid.Column="1"
+			      RowDefinitions="Auto, *"
+			      Margin="0, 0, 0, 20">
+					<StackLayout Margin="0, 20, 0, 0"
 							 VerticalOptions="Center">
-					<Label Text="{Binding Movie.Title}"
-					       FontAttributes="Bold"
-					       FontSize="Title" 
+						<Label Text="{Binding Title}" 
 					       MaxLines="2" 
-					       LineBreakMode="TailTruncation" />
-					<Label  FontSize="Caption"
-						Text="{Binding Movie.ReleaseDate, StringFormat='{0:MMMM dd, yyyy}'}"/>
-				</StackLayout>
-                <Grid Grid.Row="1">
-					<StackLayout Orientation="Horizontal" VerticalOptions="Center">
-						<Image Source="{StaticResource TimeIcon}"/>
-						<Label Text="{Binding Movie.Runtime, StringFormat='{0} min.'}"
+					       LineBreakMode="TailTruncation"
+						   FontAttributes="Bold"
+					       FontSize="Medium"/>
+						<Label FontSize="Caption"
+						Text="{Binding ReleaseDate, StringFormat='{0:MMMM dd, yyyy}'}"/>
+					</StackLayout>
+					<StackLayout Grid.Row="1"
+					             Orientation="Horizontal">
+						<Image Source="{StaticResource TimeIcon}"
+						       VerticalOptions="End"/>
+						<Label Text="{Binding Runtime, StringFormat='{0} min.'}"
                                VerticalOptions="End"
-                               FontSize="Body"/>
+                               FontSize="Caption"/>
 					</StackLayout>
 				</Grid>
-			</Grid>
-			
-			<ImageButton Grid.Column="2"
+				<ImageButton Grid.Column="2"
 			             Source="{StaticResource ImdbIcon}" 
 			             Padding="20" 
 			             BackgroundColor="#DBA506"
 			             Command="{Binding GoToImdbCommand}"/>
-			<Grid Grid.Row="2"
+				<Grid Grid.Row="2"
 				  Grid.ColumnSpan="3"
 			      RowDefinitions="Auto, Auto">
-				<Label HorizontalOptions="Center"
-				       Text="{Binding Movie.Tagline}"
+					<Label HorizontalOptions="Center"
+				       Text="{Binding Tagline}"
+					   IsVisible="{Binding Tagline, Converter={StaticResource NullToBoolConverter}}"
 				       FontSize="Title"/>
 
-				<Grid Grid.Row="1">
-					<Label Text="{Binding Movie.Overview}"
+					<Label Grid.Row="1"
+						Text="{Binding Overview}"
 					       FontSize="Body"/>
 				</Grid>
 			</Grid>
-
-        </Grid>
-        <Frame Grid.RowSpan="2"
-               Margin="30, 180, 0 ,0"
-               CornerRadius="20"
-               HasShadow="True" 
-               Padding="0"
-               HorizontalOptions="Start"
-               VerticalOptions="Start">
-	        <forms:CachedImage
-		        Source="{Binding Movie.PosterUrl, Converter={StaticResource ImageSourceConverter}}"
-		        Aspect="AspectFill"
-		        LoadingPlaceholder="PosterPlaceholder.png"
-		        ErrorPlaceholder="PosterPlaceholder.png"
-		        HeightRequest="200"/>
-        </Frame>
-	</Grid>
+		</Grid>
+	</ScrollView>
 </ContentPage>

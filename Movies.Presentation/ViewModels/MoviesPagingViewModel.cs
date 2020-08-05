@@ -7,16 +7,18 @@ using Xamarin.Forms;
 
 namespace Movies.Presentation.ViewModels
 {
-    public abstract class MoviesPagingViewModel : PagingViewModel<Movie>, IRefreshable
+    public abstract class MoviesPagingViewModel : PagingViewModel<MovieItemViewModel, Movie>
     {
         protected readonly IMoviesService MoviesService;
-
-        public ICommand NavToMovieCommand => new AsyncCommand<Movie>(
-            (movie) => Shell.Current.GoToAsync($"movieDetails?movieId={movie.Id}"));
         
         protected MoviesPagingViewModel(IMoviesService moviesService)
         {
             MoviesService = moviesService;
+        }
+
+        protected override MovieItemViewModel ToItemViewModel(Movie item)
+        {
+	        return new MovieItemViewModel(item);
         }
     }
 }

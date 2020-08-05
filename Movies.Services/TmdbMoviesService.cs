@@ -92,7 +92,7 @@ namespace Movies.Services
 				Overview = response.Overview,
 				ReleaseDate = response.ReleaseDate,
 				Runtime = response.Runtime,
-				Tagline = response.Tagline,
+				Tagline = string.IsNullOrWhiteSpace(response.Tagline) ? null : response.Tagline,
 				VoteAverage = response.VoteAverage,
 			};
 		}
