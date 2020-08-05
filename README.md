@@ -3,6 +3,12 @@ This is a reference project built using [Xamarin.Forms](https://dotnet.microsoft
 This app leverages the [Xamarin.Forms Shell](https://docs.microsoft.com/en-us/xamarin/xamarin-forms/app-fundamentals/shell/) for tabbed navigation. I chose to use Microsoft's own Dependency Injection (DI) technologies along with the [Generic Host Builder](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/host/generic-host?view=aspnetcore-3.1). My approach was partly taken from James Montemagno's [guide](https://montemagno.com/add-asp-net-cores-dependency-injection-into-xamarin-apps-with-hostbuilder/) on using ASP.NET Core's DI library for Xamarin.Forms.
 Some of the UI on the Movie Details page was also ~~copied from~~ inspired by Kym Phillpotts' excellent [blog](https://kymphillpotts.com/xamarin-forms-ui-challenge-rottenui.html) on building a Rotten Tomatoes mobile UI
 
+
+<img src="https://github.com/kazo0/Movies/blob/master/Images/android-movies.png" width="300"> <img src="https://github.com/kazo0/Movies/blob/master/Images/android-details.png" width="300">
+
+<img src="https://github.com/kazo0/Movies/blob/master/Images/ios-movies.png" width="300"> <img src="https://github.com/kazo0/Movies/blob/master/Images/ios-details.png" width="300">
+
+
 ## Architecture
 The code is separated into 4 layers, each having only a reference to the layer above it along with a `.Core` library for cross-cutting concerns:
 
