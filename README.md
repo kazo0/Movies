@@ -1,4 +1,6 @@
-![Azure DevOps builds](https://img.shields.io/azure-devops/build/stevebilogan/cbdfcddc-22b5-450c-9bb1-c502fb0e06e6/1)
+<a href="https://stevebilogan.visualstudio.com/Movies/_build">
+        <img src="https://img.shields.io/azure-devops/build/stevebilogan/cbdfcddc-22b5-450c-9bb1-c502fb0e06e6/1"
+            alt="build status"></a>
 
 # Yet Another Movies App
 This is a reference project built using [Xamarin.Forms](https://dotnet.microsoft.com/apps/xamarin/xamarin-forms). It is a simple app that uses an API from [The Movie Database](https://developers.themoviedb.org/3/getting-started/introduction) to grab top/upcoming/popular/now playing movies along with their details to display to the user.
