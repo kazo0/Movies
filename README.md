@@ -1,3 +1,5 @@
+![Azure DevOps builds](https://img.shields.io/azure-devops/build/stevebilogan/cbdfcddc-22b5-450c-9bb1-c502fb0e06e6/1)
+
 # Yet Another Movies App
 This is a reference project built using [Xamarin.Forms](https://dotnet.microsoft.com/apps/xamarin/xamarin-forms). It is a simple app that uses an API from [The Movie Database](https://developers.themoviedb.org/3/getting-started/introduction) to grab top/upcoming/popular/now playing movies along with their details to display to the user.
 This app leverages the [Xamarin.Forms Shell](https://docs.microsoft.com/en-us/xamarin/xamarin-forms/app-fundamentals/shell/) for tabbed navigation. I chose to use Microsoft's own Dependency Injection (DI) technologies along with the [Generic Host Builder](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/host/generic-host?view=aspnetcore-3.1). My approach was partly taken from James Montemagno's [guide](https://montemagno.com/add-asp-net-cores-dependency-injection-into-xamarin-apps-with-hostbuilder/) on using ASP.NET Core's DI library for Xamarin.Forms.
