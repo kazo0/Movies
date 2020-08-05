@@ -6,30 +6,63 @@
 trigger:
 - master
 
-pool:
-  vmImage: 'macos-latest'
+jobs:
+  - job: Android
+    pool:
+      vmImage: 'macos-latest'
 
-variables:
-  buildConfiguration: 'Release'
-  outputDirectory: '$(build.binariesDirectory)/$(buildConfiguration)'
+    variables:
+      buildConfiguration: 'Release'
+      outputDirectory: '$(build.binariesDirectory)/$(buildConfiguration)'
 
-steps:
-- task: NuGetToolInstaller@1
-- task: DownloadSecureFile@1
-  name: secrets
-  inputs:
-    secureFile: 'secrets.json'
-- task: CopyFiles@2
-  inputs:
-    SourceFolder: '$(Agent.TempDirectory)'
-    Contents: 'secrets.json'
-    TargetFolder: 'Movies/Movies'
-- task: NuGetCommand@2
-  inputs:
-    restoreSolution: '**/*.sln'
+    steps:
+    - task: NuGetToolInstaller@1
+    - task: DownloadSecureFile@1
+      name: secrets
+      inputs:
+        secureFile: 'secrets.json'
+    - task: CopyFiles@2
+      inputs:
+        SourceFolder: '$(Agent.TempDirectory)'
+        Contents: 'secrets.json'
+        TargetFolder: 'Movies/Movies'
+    - task: NuGetCommand@2
+      inputs:
+        restoreSolution: '**/*.sln'
 
-- task: XamarinAndroid@1
-  inputs:
-    projectFile: '**/*droid*.csproj'
-    outputDirectory: '$(outputDirectory)'
-    configuration: '$(buildConfiguration)'
+    - task: XamarinAndroid@1
+      inputs:
+        projectFile: '**/*droid*.csproj'
+        outputDirectory: '$(outputDirectory)'
+        configuration: '$(buildConfiguration)'
+        
+  - job: iOS
+    pool:
+      vmImage: 'macos-latest'
+    steps:
+    - script: sudo $AGENT_HOMEDIRECTORY/scripts/select-xamarin-sdk.sh 5_12_0
+      displayName: 'Select the Xamarin SDK version'
+      enabled: false
+      
+    - task: NuGetToolInstaller@1
+    
+    - task: DownloadSecureFile@1
+      name: secrets
+      inputs:
+        secureFile: 'secrets.json'
+        
+    - task: CopyFiles@2
+      inputs:
+        SourceFolder: '$(Agent.TempDirectory)'
+        Contents: 'secrets.json'
+        TargetFolder: 'Movies/Movies'
+    - task: NuGetCommand@2
+      inputs:
+        restoreSolution: '**/*.sln'
+
+    - task: XamariniOS@2
+      inputs:
+        solutionFile: '**/*.sln'
+        configuration: 'Release'
+        buildForSimulator: true
+        packageApp: false
